@@ -5,25 +5,38 @@
  * @s: Opcode.
  * Return: the opcode.
  */
-
-int *get_opcode(const char *s)
+int get_opcode(stack_t **stack, char *s, unsigned int line_number)
 {
-	op_t ops[] = {
+	int iterator = 0;
+
+	instruction_t ops[] = {
 		{"pint", op_pint},
 		{"pall", op_pall},
 		{"pop", op_pop},
 		{"swap", op_swap},
 		{"add", op_add},
 		{NULL, NULL}};
-	int iterator = 0;
 
-	while (ops[iterator].op != NULL)
+	while (ops[iterator].opcode != NULL)
 	{
-		if (*(ops[iterator].op) == *s)
+		if (strcmp(ops[iterator].opcode, s) == 0)
 		{
-			return (ops[iterator].f);
+			ops[iterator].f();
+			return (0);
 		}
 		iterator++;
 	}
-	return (NULL);
+	return (1);
+}
+
+/**
+ * op_push -  Prints all the values on the stack
+ * starting from the top of the stack.
+ * @num: number
+ * Return: always 0
+ */
+void op_push(stack_t *stack_s,char *num)
+{
+	printf("entro a la funcion push, num: %s\n", num);
+	return (0);
 }
