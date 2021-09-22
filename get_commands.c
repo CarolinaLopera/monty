@@ -24,9 +24,9 @@ char **get_lines(char *path)
 		if (chars == '\n')
 			num_lines++;
 	}
-	/*printf("chars: %i, lines: %i\n", num_chars, num_lines);*/
+	printf("chars: %i, lines: %i\n", num_chars, num_lines);
 	fseek(fd, 0, SEEK_SET);
-	fread(buf, num_chars - 1, 1, fd);
+	fread(buf, num_chars - 2, 1, fd);
 
 	lines = malloc((num_lines + 1) * sizeof(char *));
 	lines = token(buf, delim, lines);
@@ -43,9 +43,28 @@ char **get_lines(char *path)
  */
 void get_words(char **lines)
 {
-	int num_words = number_words(lines[7], ' ');
+	int num_words, i;
+	char **words = NULL;
+	const char *delim = " ";
+	int flag = 1;
 
-	printf("len: %li, num_w: %i\n", strlen(lines[7]), num_words);
+	for (i = 0; lines[i] != NULL; i++)
+	{
+		num_words = number_words(lines[i], ' ');
+		if (num_words == 0)
+			continue;
+		words = malloc((num_words + 1) * sizeof(char *));
+		words = token(lines[i], delim, words);
+		if (num_words == 1)
+			flag = get_opcode(words[0]);
+		if (num_words == 2 && strcmp(words[0], "push") == 0)
+			flag = op_push(words[1]);
+		if (flag == 1)
+			printf("Error command\n");
+
+		/*printf("lines[5]: %s, num_w: %i\n", lines[5], num_words);*/
+		free(words);
+	}
 }
 
 /**
@@ -70,7 +89,7 @@ char **token(char *str, const char *delim, char **array)
 		tok = strtok(NULL, delim);
 	}
 	array[j] = NULL;
-	/*printf("j is: %i\n", j);*/
+	/*printf("j is: %i\n", j);]*/
 
 	return (array);
 }

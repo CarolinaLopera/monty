@@ -39,11 +39,26 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+typedef struct op
+{
+	char *op;
+	void (*f)(void);
+} op_t;
+
 char **get_lines(char *path);
 char **token(char *str, const char *delim, char **array);
 void get_words(char **lines);
 int number_words(char *str, char delim);
+int get_opcode(const char *s);
+
 void no_open(char *path);
 void no_file(void);
+
+void op_pint(void);
+void op_pall(void);
+void op_pop(void);
+void op_swap(void);
+void op_add(void);
+int op_push(char *num);
 
 #endif
