@@ -24,7 +24,7 @@ char **get_lines(char *path)
 		if (chars == '\n')
 			num_lines++;
 	}
-	printf("chars: %i, lines: %i\n", num_chars, num_lines);
+	/*printf("chars: %i, lines: %i\n", num_chars, num_lines);*/
 	fseek(fd, 0, SEEK_SET);
 	fread(buf, num_chars - 1, 1, fd);
 
@@ -33,6 +33,19 @@ char **get_lines(char *path)
 
 	fclose(fd);
 	return (lines);
+}
+
+/**
+ * get_words - This function open, read the file.
+ *
+ * Return: void.
+ * @lines: Is a array of the lines of the file.
+ */
+void get_words(char **lines)
+{
+	int num_words = number_words(lines[7], ' ');
+
+	printf("len: %li, num_w: %i\n", strlen(lines[7]), num_words);
 }
 
 /**
@@ -57,7 +70,7 @@ char **token(char *str, const char *delim, char **array)
 		tok = strtok(NULL, delim);
 	}
 	array[j] = NULL;
-	printf("j is: %i\n", j);
+	/*printf("j is: %i\n", j);*/
 
 	return (array);
 }

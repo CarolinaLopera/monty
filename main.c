@@ -9,12 +9,13 @@
  */
 int main(int argc, char *argv[])
 {
+	char **lines = NULL;
+
 	if (argc != 2)
-	{
-		printf("USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-	get_lines(argv[argc - 1]);
+		no_file();
+
+	lines = get_lines(argv[argc - 1]);
+	get_words(lines);
 
 	return (0);
 }
