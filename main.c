@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 		no_file();
 
 	lines = get_lines(argv[argc - 1]);
-	get_words(lines);
+	list(lines);
 
 	return (0);
 }

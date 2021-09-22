@@ -1,13 +1,15 @@
 #ifndef MONTY_H
 #define MONTY_H
+
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
-#include <stddef.h>
+#include <string.h>
+#include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
+#include <stddef.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -39,26 +41,25 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef struct op
-{
-	char *op;
-	void (*f)(void);
-} op_t;
-
 char **get_lines(char *path);
+char **get_words(char *line);
+void list(char **lines);
 char **token(char *str, const char *delim, char **array);
-void get_words(char **lines);
+
+int get_opcode(stack_t **stack, char *s, unsigned int line_number);
+void op_pint(stack_t **stack, unsigned int line_number);
+void op_pall(stack_t **stack, unsigned int line_number);
+void op_pop(stack_t **stack, unsigned int line_number);
+void op_swap(stack_t **stack, unsigned int line_number);
+void op_add(stack_t **stack, unsigned int line_number);
+stack_t *op_push(stack_t **head, char **words, int line_number);
+
 int number_words(char *str, char delim);
-int get_opcode(const char *s);
+void print_int(int n);
+int write_char(char c);
 
 void no_open(char *path);
 void no_file(void);
-
-void op_pint(void);
-void op_pall(void);
-void op_pop(void);
-void op_swap(void);
-void op_add(void);
-int op_push(char *num);
+void no_int(int line_number);
 
 #endif

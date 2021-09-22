@@ -2,6 +2,8 @@
 
 /**
  * no_open - write a error if the file can't open
+ *
+ * Return: Always void.
  * @path: the rout of the monty file
  */
 void no_open(char *path)
@@ -15,9 +17,24 @@ void no_open(char *path)
 /**
  * no_file - write a error if argv != 2
  *
+ * Return: Always void.
  */
 void no_file(void)
 {
-	write(STDERR_FILENO, "USAGE: monty file\n", 19);
+	write(STDERR_FILENO, "USAGE: monty file\n", 18);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * no_file - write a error if there is no argument given to push
+ * or if it is is not a integer.
+ *
+ * Return: Always void.
+ */
+void no_int(int line_number)
+{
+	write(STDERR_FILENO, "L", 1);
+	print_int(line_number);
+	write(STDERR_FILENO, ": usage: push integer\n", 22);
 	exit(EXIT_FAILURE);
 }
