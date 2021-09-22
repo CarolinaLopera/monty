@@ -30,11 +30,28 @@ void no_file(void)
  * or if it is is not a integer.
  *
  * Return: Always void.
+ * @line_number: Is a number line 
  */
 void no_int(int line_number)
 {
 	write(STDERR_FILENO, "L", 1);
 	print_int(line_number);
 	write(STDERR_FILENO, ": usage: push integer\n", 22);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * no_command - write a error if there is no argument given to push
+ * or if it is is not a integer.
+ *
+ * Return: Always void.
+ */
+void no_command(int line_number, char *s)
+{
+	write(STDERR_FILENO, "L", 1);
+	print_int(line_number);
+	write(STDERR_FILENO, ": unknown instruction ", 22);
+	write(STDERR_FILENO, s, strlen(s));
+	write(STDERR_FILENO, "\n", 1);
 	exit(EXIT_FAILURE);
 }

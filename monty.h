@@ -10,6 +10,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stddef.h>
+#include <errno.h>
+#include <limits.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -46,7 +49,7 @@ char **get_words(char *line);
 void list(char **lines);
 char **token(char *str, const char *delim, char **array);
 
-int get_opcode(stack_t **stack, char *s, unsigned int line_number);
+void get_opcode(stack_t **stack, char *s, unsigned int line_number);
 void op_pint(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
 void op_pop(stack_t **stack, unsigned int line_number);
@@ -61,5 +64,6 @@ int write_char(char c);
 void no_open(char *path);
 void no_file(void);
 void no_int(int line_number);
+void no_command(int line_number, char *s);
 
 #endif

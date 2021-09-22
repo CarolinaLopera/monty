@@ -8,11 +8,12 @@
  */
 char **get_lines(char *path)
 {
-	int num_chars = 0, chars, num_lines = 0;
+	int num_chars = 0, num_lines = 0, chars = 0;
 	char **lines = NULL;
 	const char *delim = "\n";
 	char buf[1024];
 	FILE *fd;
+	(void)chars;
 
 	fd = fopen(path, "r");
 	if (fd == NULL)
@@ -22,20 +23,20 @@ char **get_lines(char *path)
 	{
 		chars = getc(fd);
 		num_chars++;
-		if (chars == '\n')
-			num_lines++;
 	}
 	fseek(fd, 0, SEEK_SET);
-	printf("chars: %i, lines: %i\n", num_chars, num_lines);
 	fread(buf, num_chars, 1, fd);
+	/*printf("%s", buf);*/
 
-	lines = malloc((num_lines + 3) * sizeof(char *));
+	num_lines = number_words(buf, '\n');
+	printf("chars: %i, lines: %i\n", num_chars, num_lines);
+
+	lines = malloc((num_lines + 2) * sizeof(char *));
 	lines = token(buf, delim, lines);
 
 	fclose(fd);
 	return (lines);
 	/*getline(&buf, num_chars, fd);
-	num_lines = number_words(buf, '\n');
 	printf("%s", buf);*/
 }
 
@@ -54,7 +55,7 @@ char **get_words(char *line)
 	num_words = number_words(line, ' ');
 	words = malloc((num_words + 1) * sizeof(char *));
 	words = token(line, delim, words);
-	printf("num_w is: %i\n", num_words);
+	/*printf("num_w is: %i\n", num_words);*/
 
 	/*if (num_words == 0)
 	{
@@ -70,6 +71,7 @@ void list(char **lines)
 	char **words = NULL;
 	int i, num_words;
 	stack_t *head = NULL;
+	(void)num_words;
 
 	for (i = 0; lines[i] != NULL; i++)
 	{
@@ -80,10 +82,8 @@ void list(char **lines)
 
 		if (strcmp(words[0], "push") == 0)
 			op_push(&head, words, i + 1);
-		else if (num_words == 1)
-			get_opcode(&head, words[0], i + 1);
 		else
-			printf("Error command\n");
+			get_opcode(&head, words[0], i + 1);
 
 		/*
 		num_words = number_words(lines[i], ' ');

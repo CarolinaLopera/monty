@@ -9,6 +9,9 @@ void op_pint(stack_t **stack, unsigned int line_number)
 	(void)stack;
 	(void)line_number;
 	printf("entro a la funcion pint\n");
+
+	if (stack != NULL)
+		printf("%i\n", (*stack)->n);
 }
 
 /**
@@ -20,14 +23,15 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	size_t i = 0;
 	(void)line_number;
 
-	printf("entro a la funcion pall\n");
+	/*printf("entro a la funcion pall\n");*/
 
-	while (stack != NULL)
+	while (*stack != NULL)
 	{
 		printf("%i\n", (*stack)->n);
 		(*stack) = (*stack)->next;
 		i++;
 	}
+	/*printf("salió a la funcion pall\n");*/
 }
 
 /**

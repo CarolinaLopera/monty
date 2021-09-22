@@ -5,7 +5,7 @@
  * @s: Opcode.
  * Return: the opcode.
  */
-int get_opcode(stack_t **stack, char *s, unsigned int line_number)
+void get_opcode(stack_t **stack, char *s, unsigned int line_number)
 {
 	int iterator = 0;
 
@@ -22,11 +22,11 @@ int get_opcode(stack_t **stack, char *s, unsigned int line_number)
 		if (strcmp(ops[iterator].opcode, s) == 0)
 		{
 			ops[iterator].f(stack, line_number);
-			return (0);
+			return;
 		}
 		iterator++;
 	}
-	return (1);
+	no_command(line_number, s);
 }
 
 /**
@@ -38,7 +38,7 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 	int num;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	printf("entro a la funcion push\n");
+	/*printf("entro a la funcion push\n");*/
 	if (new_node == NULL)
 	{
 		free(new_node);
@@ -59,6 +59,13 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 	if (*head != NULL)
 		(*head)->prev = new_node;
 	(*head) = new_node;
+
+	/*if (new_node->prev != NULL)
+		printf("prev: %i\n", new_node->prev->n);
+	if (new_node->next != NULL)
+		printf("next: %i\n", new_node->next->n);
+	printf("new: %i\n", new_node->n);
+	printf("salió de la funcion push\n");*/
 
 	return (new_node);
 }
