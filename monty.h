@@ -1,13 +1,18 @@
 #ifndef MONTY_H
 #define MONTY_H
+
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
-#include <stddef.h>
+#include <string.h>
+#include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
+#include <stddef.h>
+#include <errno.h>
+#include <limits.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -20,9 +25,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -35,12 +40,34 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 char **get_lines(char *path);
-void no_open(char *path);
+char **get_words(char *line);
+void list(char **lines);
 char **token(char *str, const char *delim, char **array);
+
+void get_opcode(stack_t **stack, char *s, unsigned int line_number);
+void op_pint(stack_t **stack, unsigned int line_number);
+void op_pall(stack_t **stack, unsigned int line_number);
+void op_pop(stack_t **stack, unsigned int line_number);
+void op_swap(stack_t **stack, unsigned int line_number);
+void op_add(stack_t **stack, unsigned int line_number);
+stack_t *op_push(stack_t **head, char **words, int line_number);
+
+int number_words(char *str, char delim);
+void print_int(int n);
+int write_char(char c);
+
+void no_open(char *path);
+void no_file(void);
+void no_int(int line_number);
+void no_command(int line_number, char *s);
+void stack_empty(int line_number);
+void lesstwoelements(int line_number);
+void lesstwoelementsswap(int line_number);
+void stack_emptypop(int line_number);
 
 #endif
