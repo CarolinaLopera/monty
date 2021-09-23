@@ -1,18 +1,11 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#define  _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stddef.h>
-#include <errno.h>
-#include <limits.h>
-#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -44,8 +37,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-char **get_lines(char *path);
-char **get_words(char *line);
+void get_lines(char *path);
+char **get_words(char *line, char *path, int nl);
 void list(char **lines);
 char **token(char *str, const char *delim, char **array);
 
@@ -58,6 +51,8 @@ void op_add(stack_t **stack, unsigned int line_number);
 stack_t *op_push(stack_t **head, char **words, int line_number);
 
 int number_words(char *str, char delim);
+int number_lines(char *path, int num_lines);
+char **copyn(char **cpy, char **lines);
 void print_int(int n);
 int write_char(char c);
 

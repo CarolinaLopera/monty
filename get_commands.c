@@ -6,38 +6,32 @@
  * Return: A array with each command line.
  * @path: Is a path of the file in argv.
  */
-char **get_lines(char *path)
+void get_lines(char *path)
 {
-	int num_chars = 0, num_lines = 0, chars = 0;
-	char **lines = NULL;
-	const char *delim = "\n";
-	char buf[1024];
+	size_t num_chars = 0;
+	char *buf = NULL, **words = NULL;
+	int num_words = 0, num_lines = 0;
 	FILE *fd;
-	(void)chars;
+	stack_t *head = NULL;
 
 	fd = fopen(path, "r");
 	if (fd == NULL)
 		no_open(path);
-	chars = getc(fd);
-	while (chars != EOF)
+
+	while (getline(&buf, &num_chars, fd) != EOF)
 	{
-		chars = getc(fd);
-		num_chars++;
+		num_lines++;
+		num_words = number_words(buf, ' ');
+		if (num_words == 0 || buf[0] == '\n')
+			continue;
+		words = get_words(buf, path, num_lines);
+		if (strcmp(words[0], "push") == 0)
+			op_push(&head, words, num_lines);
+		else
+			get_opcode(&head, words[0], num_lines);
 	}
-	fseek(fd, 0, SEEK_SET);
-	fread(buf, num_chars, 1, fd);
-	/*printf("%s", buf);*/
-
-	num_lines = number_words(buf, '\n');
-	printf("chars: %i, lines: %i\n", num_chars, num_lines);
-
-	lines = malloc((num_lines + 2) * sizeof(char *));
-	lines = token(buf, delim, lines);
 
 	fclose(fd);
-	return (lines);
-	/*getline(&buf, num_chars, fd);
-	printf("%s", buf);*/
 }
 
 /**
@@ -46,27 +40,36 @@ char **get_lines(char *path)
  * Return: void.
  * @lines: Is a array of the lines of the file.
  */
-char **get_words(char *line)
+char **get_words(char *line, char *path, int nl)
 {
-	int num_words;
+	int num_words, len, flag = 0;
 	char **words = NULL;
 	const char *delim = " ";
+	char *command = NULL;
+	int num_lines = 0;
+	num_lines = number_lines(path, num_lines);
 
 	num_words = number_words(line, ' ');
+	if (line[strlen(line)] == '\0')
+		flag = 1;
+
 	words = malloc((num_words + 1) * sizeof(char *));
 	words = token(line, delim, words);
-	/*printf("num_w is: %i\n", num_words);*/
 
-	/*if (num_words == 0)
-	{
-		free(words);
-		return (NULL);
-	}*/
+	/*printf("nl: %i, nt: %i", nl, num_lines);*/
+	if (flag == 1 || nl != (num_lines + 1))
+		return (words);
+
+	len = strlen(words[num_words - 1]) - 1;
+	command = malloc((len + 1) * sizeof(char));
+
+	command = strncpy(command, words[num_words - 1], len);
+	words[num_words - 1] = command;
+
 	return (words);
-
 }
 
-void list(char **lines)
+/*void list(char **lines)
 {
 	char **words = NULL;
 	int i, num_words;
@@ -77,19 +80,19 @@ void list(char **lines)
 	{
 		num_words = number_words(lines[i], ' ');
 		words = get_words(lines[i]);
-		/*if (words == NULL)
-			continue;*/
+		if (words == NULL)
+			continue;
 
-		if (strcmp(words[0], "push") == 0)
-			op_push(&head, words, i + 1);
-		else
-			get_opcode(&head, words[0], i + 1);
+	if (strcmp(words[0], "push") == 0)
+		op_push(&head, words, i + 1);
+	else
+		get_opcode(&head, words[0], i + 1);
 
-		/*
+		
 		num_words = number_words(lines[i], ' ');
-		free(words);*/
+		free(words);
 	}
-}
+}*/
 
 /**
  * token - This function split a string for lines.

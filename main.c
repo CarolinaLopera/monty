@@ -9,13 +9,10 @@
  */
 int main(int argc, char *argv[])
 {
-	char **lines = NULL;
-
 	if (argc != 2)
 		no_file();
 
-	lines = get_lines(argv[argc - 1]);
-	list(lines);
+	get_lines(argv[argc - 1]);
 
 	return (0);
 }

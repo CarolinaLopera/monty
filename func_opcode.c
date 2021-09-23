@@ -20,7 +20,8 @@ void op_pint(stack_t **stack, unsigned int line_number)
  */
 void op_pall(stack_t **stack, unsigned int line_number)
 {
-	size_t i = 0;
+	int i = 0;
+	stack_t *head = (*stack);
 	(void)line_number;
 
 	/*printf("entro a la funcion pall\n");*/
@@ -31,6 +32,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 		(*stack) = (*stack)->next;
 		i++;
 	}
+	(*stack) = head;
 	/*printf("salió a la funcion pall\n");*/
 }
 
