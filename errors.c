@@ -30,7 +30,7 @@ void no_file(void)
  * or if it is is not a integer.
  *
  * Return: Always void.
- * @line_number: Is a number line 
+ * @line_number: Is a number line.
  */
 void no_int(int line_number)
 {

@@ -35,6 +35,7 @@ void lesstwoelements(int line_number)
  * has less of two elements and swap is executed.
  *
  * Return: Always void.
+ * @line_number: Is a number line.
  */
 void lesstwoelementsswap(int line_number)
 {

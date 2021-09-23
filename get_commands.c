@@ -42,27 +42,6 @@ void get_lines(char *path)
 }
 
 /**
- * get_words - This function open, read the file.
- * Return: void.
- * @line: Is a array of the lines of the file.
- * @path: Is a path of the file in argv.
- */
-/*char **get_words(char *line, char *path, int nl)
-{
-	int num_words;
-	char **words = NULL;
-	const char *delim = " \n\t";
-	(void)nl, (void)path;
-
-	num_words = number_words(line, ' ');
-
-	words = malloc((num_words + 1) * sizeof(char *));
-	words = token(line, delim, words);
-
-	return (words);
-}*/
-
-/**
  * token - This function split a string for lines.
  *
  * Return: Always a array of pointers.

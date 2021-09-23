@@ -1,6 +1,45 @@
 #include "monty.h"
 
 /**
+ * op_push -  Prints all the values on the stack
+ * starting from the top of the stack.
+ *
+ * Return: A pointer to new node.
+ * @head: Is a header of the list.
+ * @line_number: Is a number line.
+ * @words: Is a array of the words with the commands.
+ */
+stack_t *op_push(stack_t **head, char **words, int line_number)
+{
+	int num;
+	stack_t *new_node = malloc(sizeof(stack_t));
+
+	if (new_node == NULL)
+	{
+		free(new_node);
+		no_malloc();
+	}
+
+	if (words[1] == NULL)
+		no_int(line_number);
+
+	/*for (i = 0; words[1] != '\0')*/
+
+	num = atoi(words[1]);
+	if (num == 0)
+		no_int(line_number);
+	new_node->n = num;
+	new_node->next = (*head);
+	new_node->prev = NULL;
+
+	if (*head != NULL)
+		(*head)->prev = new_node;
+	(*head) = new_node;
+
+	return (new_node);
+}
+
+/**
  * get_opcode - compare the opcode with corresponding function.
  * @s: Is the command.
  * @stack: Is a header of the list.
@@ -30,48 +69,6 @@ void get_opcode(stack_t **stack, char *s, unsigned int line_number)
 		iterator++;
 	}
 	no_command(line_number, s);
-}
-
-/**
- * op_push -  Prints all the values on the stack
- * starting from the top of the stack.
- *
- * Return: A pointer to new node.
- * @head: Is a header of the list.
- * @line_number: Is a number line.
- * @words: Is a array of the words with the commands.
- */
-stack_t *op_push(stack_t **head, char **words, int line_number)
-{
-	int num;
-	stack_t *new_node = malloc(sizeof(stack_t));
-
-	if (new_node == NULL)
-	{
-		free(new_node);
-		no_malloc();
-	}
-
-	if (words[1] == NULL)
-		no_int(line_number);
-
-	/*for (i = 0; words[1] != '\0')*/
-
-
-	num = atoi(words[1]);
-	if (num == 0)
-		no_int(line_number);
-
-
-	new_node->n = num;
-	new_node->next = (*head);
-	new_node->prev = NULL;
-
-	if (*head != NULL)
-		(*head)->prev = new_node;
-	(*head) = new_node;
-
-	return (new_node);
 }
 
 /**

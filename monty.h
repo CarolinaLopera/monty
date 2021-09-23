@@ -38,7 +38,6 @@ typedef struct instruction_s
 } instruction_t;
 
 void get_lines(char *path);
-char **get_words(char *line, char *path, int nl);
 void get_opcode(stack_t **stack, char *s, unsigned int line_number);
 char **token(char *str, const char *delim, char **array);
 

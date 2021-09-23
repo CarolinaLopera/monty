@@ -103,7 +103,7 @@ void op_add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = (*stack);
 	int sum = 0;
-	int contador = 0; 
+	int contador = 0;
 
 	while ((*stack) != NULL)
 	{
