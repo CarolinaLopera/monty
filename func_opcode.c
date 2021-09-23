@@ -36,7 +36,6 @@ void op_pall(stack_t **stack, unsigned int line_number)
 		i++;
 	}
 	head = (*stack);
-	printf("salio de la funcion pall\n");
 }
 
 /**
@@ -46,7 +45,6 @@ void op_pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = (*stack);
 	(void)line_number;
-	printf("entro a la funcion pop\n");
 
 	if ((*stack) != NULL)
 	{
@@ -65,9 +63,28 @@ void op_pop(stack_t **stack, unsigned int line_number)
  */
 void op_swap(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
-	printf("entro a la funcion swap\n");
+	stack_t *head = (*stack);
+	stack_t *temp = (*stack);
+	int contador = 0;
+
+	while((*stack) != NULL)
+	{
+		(*stack) = (*stack)->next;
+		contador++;
+	}
+	(*stack) = head;
+	if(contador < 2)
+	{
+		lesstwoelementsswap(line_number);
+	}
+	else
+	{
+		(*stack) = (*stack)->next;
+		temp->prev = (*stack);
+		temp->next = (*stack)->next;
+		(*stack)->next = temp;
+	}
+	
 }
 
 /**
