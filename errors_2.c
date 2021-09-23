@@ -17,7 +17,7 @@ void stack_emptypop(int line_number)
 
 /**
  * lesstwoelements - write a error if the list
- * has less of two elements.
+ * has less of two elements and add is executed.
  *
  * Return: Always void.
  * @line_number: Is a number line
@@ -26,13 +26,13 @@ void lesstwoelements(int line_number)
 {
 	write(STDERR_FILENO, "L", 1);
 	print_int(line_number);
-	write(STDERR_FILENO, ": can't add, stack too short\n", 28);
+	write(STDERR_FILENO, ": can't add, stack too short\n", 29);
 	exit(EXIT_FAILURE);
 }
 
 /**
  * lesstwoelementsswap - write a error if the list
- * has less of two elements.
+ * has less of two elements and swap is executed.
  *
  * Return: Always void.
  */
@@ -40,6 +40,17 @@ void lesstwoelementsswap(int line_number)
 {
 	write(STDERR_FILENO, "L", 1);
 	print_int(line_number);
-	write(STDERR_FILENO, ": can't swap, stack too short\n", 29);
+	write(STDERR_FILENO, ": can't swap, stack too short\n", 30);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * no_malloc - write a error if malloc fail.
+ *
+ * Return: Always void.
+ */
+void no_malloc(void)
+{
+	write(STDERR_FILENO, "Error: malloc failed\n", 21);
 	exit(EXIT_FAILURE);
 }

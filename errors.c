@@ -59,7 +59,7 @@ void no_command(int line_number, char *s)
 
 /**
  * stack_empty - write a error if the list is empty
- * and try to print a node.
+ * and pint is executed.
  *
  * Return: Always void.
  * @line_number: Is a number line
@@ -68,6 +68,6 @@ void stack_empty(int line_number)
 {
 	write(STDERR_FILENO, "L", 1);
 	print_int(line_number);
-	write(STDERR_FILENO, ": can't pint, stack empty\n", 25);
+	write(STDERR_FILENO, ": can't pint, stack empty\n", 26);
 	exit(EXIT_FAILURE);
 }

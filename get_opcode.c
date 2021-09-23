@@ -17,6 +17,7 @@ void get_opcode(stack_t **stack, char *s, unsigned int line_number)
 		{"pop", op_pop},
 		{"swap", op_swap},
 		{"add", op_add},
+		{"nop", op_nop},
 		{NULL, NULL}};
 
 	while (ops[iterator].opcode != NULL)
@@ -48,15 +49,19 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 	if (new_node == NULL)
 	{
 		free(new_node);
-		return (NULL);
+		no_malloc();
 	}
 
 	if (words[1] == NULL)
 		no_int(line_number);
 
+	/*for (i = 0; words[1] != '\0')*/
+
+
 	num = atoi(words[1]);
 	if (num == 0)
 		no_int(line_number);
+
 
 	new_node->n = num;
 	new_node->next = (*head);
@@ -67,4 +72,16 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 	(*head) = new_node;
 
 	return (new_node);
+}
+
+/**
+ * op_nop - This function doesn’t do anything.
+ *
+ * Return: Always void.
+ * @stack: Is a pointer to header of the list.
+ * @line_number: Is a current number line.
+ */
+void op_nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack, (void)line_number;
 }
