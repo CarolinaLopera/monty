@@ -11,23 +11,22 @@
  */
 stack_t *op_push(stack_t **head, char **words, int line_number)
 {
-	int num;
+	int num, i;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL)
-	{
-		free(new_node);
 		no_malloc();
-	}
 
 	if (words[1] == NULL)
 		no_int(line_number);
 
-	/*for (i = 0; words[1] != '\0')*/
-
+	for (i = 0; words[1][i] != '\0'; i++)
+	{
+		if (isdigit(words[1][i]) == 0)
+			no_int(line_number);
+	}
 	num = atoi(words[1]);
-	if (num == 0)
-		no_int(line_number);
+
 	new_node->n = num;
 	new_node->next = (*head);
 	new_node->prev = NULL;
