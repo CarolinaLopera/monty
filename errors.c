@@ -26,7 +26,7 @@ void no_file(void)
 }
 
 /**
- * no_file - write a error if there is no argument given to push
+ * no_int - write a error if there is no argument given to push
  * or if it is is not a integer.
  *
  * Return: Always void.
@@ -41,10 +41,11 @@ void no_int(int line_number)
 }
 
 /**
- * no_command - write a error if there is no argument given to push
- * or if it is is not a integer.
+ * no_command - write a error if no find command.
  *
  * Return: Always void.
+ * @line_number: Is a number line
+ * @s: string with the instruction bad
  */
 void no_command(int line_number, char *s)
 {
@@ -53,5 +54,20 @@ void no_command(int line_number, char *s)
 	write(STDERR_FILENO, ": unknown instruction ", 22);
 	write(STDERR_FILENO, s, strlen(s));
 	write(STDERR_FILENO, "\n", 1);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * stack_empty - write a error if the list is empty
+ * and try to print a node.
+ *
+ * Return: Always void.
+ * @line_number: Is a number line
+ */
+void stack_empty(int line_number)
+{
+	write(STDERR_FILENO, "L", 1);
+	print_int(line_number);
+	write(STDERR_FILENO, ": can't pint, stack empty\n", 25);
 	exit(EXIT_FAILURE);
 }

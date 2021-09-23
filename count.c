@@ -22,6 +22,13 @@ int number_words(char *str, char delim)
 	return (w);
 }
 
+/**
+ * number_lines - count the lines in a string
+ *
+ * Return: Number of lines.
+ * @path: Is a path of the file to read
+ * @num_lines: is a variable int.
+ */
 int number_lines(char *path, int num_lines)
 {
 	char buf[1024];
@@ -42,25 +49,10 @@ int number_lines(char *path, int num_lines)
 	}
 	fseek(fd, 0, SEEK_SET);
 	fread(buf, num_chars, 1, fd);
-	/*num_lines = number_words(buf, '\n');*/
 
 	fclose(fd);
 	return (num_lines);
 }
-
-/*char **copyn(char **cpy, char **lines)
-{
-	int i = 0;
-
-	while (*lines != NULL)
-	{
-		printf("%s\n", *lines);
-		cpy[i] = strncpy(cpy[i], lines[i], strlen(lines[i]) - 1);
-		i++;
-		lines++;
-	}
-	return (cpy);
-}*/
 
 /**
  * print_int - Function to print numbers int in console.
