@@ -56,6 +56,7 @@ void op_pop(stack_t **stack, unsigned int line_number);
 void op_swap(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 stack_t *op_push(stack_t **head, char **words, int line_number);
+void op_nop(stack_t **stack, unsigned int line_number);
 
 int number_words(char *str, char delim);
 void print_int(int n);
