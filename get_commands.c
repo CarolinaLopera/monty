@@ -43,7 +43,6 @@ void get_lines(char *path)
 
 /**
  * get_words - This function open, read the file.
- *
  * Return: void.
  * @line: Is a array of the lines of the file.
  * @path: Is a path of the file in argv.
