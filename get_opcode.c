@@ -56,6 +56,10 @@ void get_opcode(stack_t **stack, char *s, unsigned int line_number)
 		{"swap", op_swap},
 		{"add", op_add},
 		{"nop", op_nop},
+		{"sub", op_sub},
+		{"div", op_div},
+		{"mul", op_mul},
+		{"pchar", op_pchar},
 		{NULL, NULL}};
 
 	while (ops[iterator].opcode != NULL)
