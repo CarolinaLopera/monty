@@ -48,6 +48,10 @@ void op_pop(stack_t **stack, unsigned int line_number);
 void op_swap(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 void op_nop(stack_t **stack, unsigned int line_number);
+void op_sub(stack_t **stack, unsigned int line_number);
+void op_div(stack_t **stack, unsigned int line_number);
+void op_mul(stack_t **stack, unsigned int line_number);
+void op_pchar(stack_t **stack, unsigned int line_number);
 stack_t *op_push(stack_t **head, char **words, int line_number);
 
 int number_words(char *str, char delim);
@@ -64,5 +68,11 @@ void stack_empty(int line_number);
 void stack_emptypop(int line_number);
 void lesstwoelements(int line_number);
 void lesstwoelementsswap(int line_number);
+void lesstwoelementsub(int line_number);
+void lesstwoelementsdiv(int line_number);
+void divbyzero(int line_number);
+void lesstwoelementsmul(int line_number);
+void asciivalue(int line_number);
+void stack_emptypchar(int line_number);
 
 #endif
