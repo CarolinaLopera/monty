@@ -8,6 +8,8 @@
 #include <string.h>
 #include <ctype.h>
 
+/*STRUCTURES*/
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -38,8 +40,10 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/*PROTOTYPES*/
+
 void get_lines(char *path);
-void get_opcode(stack_t **stack, char *s, unsigned int line_number);
+void get_opcode(stack_t **stack, char **words, unsigned int line_number);
 char **token(char *str, const char *delim, char **array);
 
 void op_pint(stack_t **stack, unsigned int line_number);
@@ -48,10 +52,7 @@ void op_pop(stack_t **stack, unsigned int line_number);
 void op_swap(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 void op_nop(stack_t **stack, unsigned int line_number);
-void op_sub(stack_t **stack, unsigned int line_number);
-void op_div(stack_t **stack, unsigned int line_number);
-void op_mul(stack_t **stack, unsigned int line_number);
-void op_pchar(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t **head);
 stack_t *op_push(stack_t **head, char **words, int line_number);
 
 int number_words(char *str, char delim);
@@ -63,16 +64,10 @@ void no_open(char *path);
 void no_file(void);
 void no_malloc(void);
 void no_int(int line_number);
-void no_command(int line_number, char *s);
+void no_command(int line_number, char **words);
 void stack_empty(int line_number);
 void stack_emptypop(int line_number);
 void lesstwoelements(int line_number);
 void lesstwoelementsswap(int line_number);
-void lesstwoelementsub(int line_number);
-void lesstwoelementsdiv(int line_number);
-void divbyzero(int line_number);
-void lesstwoelementsmul(int line_number);
-void asciivalue(int line_number);
-void stack_emptypchar(int line_number);
 
 #endif

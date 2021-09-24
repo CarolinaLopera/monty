@@ -23,7 +23,7 @@ int number_words(char *str, char delim)
 }
 
 /**
- * number_lines - count the lines in a string
+ * number_lines - count the lines in a string.
  *
  * Return: Number of lines.
  * @path: Is a path of the file to read
