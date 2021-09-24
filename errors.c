@@ -45,7 +45,7 @@ void no_int(int line_number)
  *
  * Return: Always void.
  * @line_number: Is a number line
- * @s: string with the instruction bad
+ * @words: array with the instructions.
  */
 void no_command(int line_number, char **words)
 {
