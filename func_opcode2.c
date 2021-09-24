@@ -22,21 +22,10 @@ void op_sub(stack_t **stack, unsigned int line_number)
 	(*stack) = head;
 	if (contador < 2)
 		lesstwoelementsub(line_number);
-	else
-	{
-		if ((*stack)->next->n > (*stack)->n)
-		{
-			sub = ((*stack)->next->n - (*stack)->n);
-			op_pop(stack, line_number);
-			(*stack)->n = sub;
-		}
-		else
-		{
-			sub = ((*stack)->n - (*stack)->next->n);
-			op_pop(stack, line_number);
-			(*stack)->n = sub;
-		}
-	}
+
+	sub = (*stack)->next->n - (*stack)->n;
+	op_pop(stack, line_number);
+	(*stack)->n = sub;
 }
 
 /**
