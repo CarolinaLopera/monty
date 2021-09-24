@@ -55,3 +55,18 @@ void no_malloc(void)
 	write(STDERR_FILENO, "Error: malloc failed\n", 21);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * lesstwoelementsub - write a error if the list
+ * has less of two elements and sub is executed.
+ *
+ * Return: Always void.
+ * @line_number: Is a number line.
+ */
+void lesstwoelementsub(int line_number)
+{
+	write(STDERR_FILENO, "L", 1);
+	print_int(line_number);
+	write(STDERR_FILENO, ": can't sub, stack too short\n", 29);
+	exit(EXIT_FAILURE);
+}

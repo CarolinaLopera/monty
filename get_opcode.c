@@ -11,7 +11,7 @@
  */
 stack_t *op_push(stack_t **head, char **words, int line_number)
 {
-	int num, i;
+	int num, i, flag = 0;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL)
@@ -20,7 +20,6 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 		free_stack(head);
 		no_malloc();
 	}
-
 	if (words[1] == NULL)
 	{
 		free(words), free(new_node);
@@ -30,6 +29,11 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 
 	for (i = 0; words[1][i] != '\0'; i++)
 	{
+		if (words[1][0] == '-' && flag == 0)
+		{
+			flag = 1;
+			continue;
+		}
 		if (isdigit(words[1][i]) == 0)
 		{
 			free(words), free(new_node);
@@ -42,7 +46,6 @@ stack_t *op_push(stack_t **head, char **words, int line_number)
 	new_node->n = num;
 	new_node->next = (*head);
 	new_node->prev = NULL;
-
 	if (*head != NULL)
 		(*head)->prev = new_node;
 	(*head) = new_node;
@@ -82,7 +85,7 @@ void free_stack(stack_t **head)
 
 /**
  * get_opcode - compare the opcode with corresponding function.
- * @s: Is the command.
+ * @words: Is array with the commands.
  * @stack: Is a header of the list.
  * @line_number: Is a number line.
  * Return: Always void.
@@ -98,6 +101,10 @@ void get_opcode(stack_t **stack, char **words, unsigned int line_number)
 		{"swap", op_swap},
 		{"add", op_add},
 		{"nop", op_nop},
+		{"sub", op_sub},
+		{"div", op_div},
+		{"mul", op_mul},
+		{"pchar", op_pchar},
 		{NULL, NULL}};
 
 	while (ops[iterator].opcode != NULL)
