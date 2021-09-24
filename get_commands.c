@@ -24,21 +24,22 @@ void get_lines(char *path)
 		num_words = number_words(buf, ' ');
 		if (num_words == 0 || buf[0] == '\n' || buf[0] == '#' || buf[0] == '\t')
 			continue;
+
 		words = malloc((num_words + 1) * sizeof(char *));
+		if (words == NULL)
+			no_malloc();
 		words = token(buf, " \n\t", words);
 
 		if (strcmp(words[0], "push") == 0)
 			op_push(&head, words, num_lines);
 		else
-			get_opcode(&head, words[0], num_lines);
+			get_opcode(&head, words, num_lines);
 		free(words);
 	}
 
-	/*free(head);*/
+	free(buf);
+	free_stack(&head);
 	fclose(fd);
-
-	/*words = get_words(buf, path, num_lines);*/
-	/*printf("n%i\n", num_words);*/
 }
 
 /**

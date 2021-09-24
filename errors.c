@@ -47,13 +47,14 @@ void no_int(int line_number)
  * @line_number: Is a number line
  * @s: string with the instruction bad
  */
-void no_command(int line_number, char *s)
+void no_command(int line_number, char **words)
 {
 	write(STDERR_FILENO, "L", 1);
 	print_int(line_number);
 	write(STDERR_FILENO, ": unknown instruction ", 22);
-	write(STDERR_FILENO, s, strlen(s));
+	write(STDERR_FILENO, words[0], strlen(words[0]));
 	write(STDERR_FILENO, "\n", 1);
+	free(words);
 	exit(EXIT_FAILURE);
 }
 
