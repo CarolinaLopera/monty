@@ -1,10 +1,10 @@
 #include "monty.h"
 
 /**
- * number_words - count the words in a string
- * @str: string
- * @delim: is a delimitador for string
- * Return: number of words
+ * number_words - count the words in a string.
+ * @str: string.
+ * @delim: is a delimitador for string.
+ * Return: number of words.
  */
 int number_words(char *str, char delim)
 {
