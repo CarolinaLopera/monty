@@ -1,3 +1,4 @@
-push 1
-pint
+push 98
+push 402
+sub Holberton
 pall
